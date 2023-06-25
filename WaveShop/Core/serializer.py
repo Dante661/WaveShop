@@ -5,38 +5,38 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'email', 'createDate']
+        fields = ['id', 'username', 'password', 'email', 'create_at']
 
 
-class ItemSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
+        model = Product
         fields = ['id', 'title', 'description',
-                  'storeId', 'category', 'price', 'createDate',]
+                  'storeId', 'category', 'price', 'create_at',]
 
 
-class ItemImgSerializer(serializers.ModelSerializer):
+class ProductImgSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ItemImg
-        fields = ['id', 'title', 'itemId', 'imgUrl', ]
+        model = ProductImg
+        fields = ['id', 'productId', 'imgUrl', ]
 
 
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
-        fields = ['id', 'userId', 'name', 'createDate', ]
+        fields = ['id', 'userId', 'name', 'create_at', ]
 
 
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ItemImg
+        model = Cart
         fields = ['id', 'userId', 'quantity']
 
 
-class CartItemImgSerializer(serializers.ModelSerializer):
+class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ItemImg
-        fields = ['id', 'cartId', 'itemId', 'quantity', 'createDate', ]
+        model = CartItem
+        fields = ['id', 'cartId', 'productId', 'quantity', 'create_at', ]
 
 
 class ImgUploadSerializer(serializers.ModelSerializer):
@@ -46,9 +46,9 @@ class ImgUploadSerializer(serializers.ModelSerializer):
 
 
 class JoinSerializer(serializers.ModelSerializer):
-    item_details = ItemSerializer(source='itemId')
+    item_details = ProductSerializer(source='productId')
 
     class Meta:
         model = CartItem
         fields = ['id', 'cartId', 'itemId',
-                  'item_details', 'quantity', 'createDate', ]
+                  'item_details', 'quantity', 'create_at', ]

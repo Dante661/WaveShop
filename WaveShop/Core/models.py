@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -8,29 +9,29 @@ class User (models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
-    createDate = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True)
 
 
 class Store(models.Model):
     """Store"""
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    createDate = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True)
 
 
-class Item(models.Model):
+class Product(models.Model):
     """Product"""
     title = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
     storeId = models.ForeignKey(Store, on_delete=models.CASCADE)
     category = models.CharField(max_length=100)
     price = models.IntegerField()
-    createDate = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True)
 
 
-class ItemImg(models.Model):
+class ProductImg(models.Model):
     """Image"""
-    itemId = models.ForeignKey(Item, on_delete=models.CASCADE)
+    productId = models.ForeignKey(Product, on_delete=models.CASCADE)
     imgUrl = models.IntegerField()
 
 
@@ -54,6 +55,6 @@ class Cart(models.Model):
 class CartItem(models.Model):
     """Cart item model"""
     cartId = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    itemId = models.ForeignKey(Item, on_delete=models.CASCADE)
+    itemId = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     createDate = models.DateTimeField(auto_now_add=True)
