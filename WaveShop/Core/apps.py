@@ -2,5 +2,9 @@ from django.apps import AppConfig
 
 
 class CoreConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Core'
+    """Args:
+    AppConfig (_type_): _description_
+    """
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "Core"
